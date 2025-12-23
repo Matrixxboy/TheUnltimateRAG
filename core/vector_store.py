@@ -17,12 +17,17 @@ class VectorManager:
             embedding_function=self.embeddings,
         )
 
-    def add_documents(self, documents: List[Document]):
+    def add_documents(self, documents: List[Document], user_id: Optional[str] = None):
         """
         Add a list of documents to the vector store.
         """
         if not documents:
             return
+        
+        # Add metadata
+        if user_id:
+            for doc in documents:
+                doc.metadata["user_id"] = user_id
         
         self.vector_store.add_documents(documents)
         # self.vector_store.persist()
@@ -33,8 +38,12 @@ class VectorManager:
         """
         return self.vector_store.similarity_search(query, k=k)
 
-    def get_retriever(self):
+    def get_retriever(self, search_kwargs: Optional[dict] = None):
         """
         Get the retriever interface for LangChain chains.
         """
-        return self.vector_store.as_retriever()
+        _kwargs = {"k": 4}
+        if search_kwargs:
+            _kwargs.update(search_kwargs)
+            
+        return self.vector_store.as_retriever(search_kwargs=_kwargs)

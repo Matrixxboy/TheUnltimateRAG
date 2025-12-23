@@ -38,9 +38,14 @@ async def get_history(session_id: str):
         # We need to convert to string or dict for JSON response
         formatted_history = []
         for msg in history:
+            # Check if msg is a LangChain Message object and convert to dict
+            content = msg.content if hasattr(msg, "content") else str(msg)
+            msg_type = msg.type if hasattr(msg, "type") else "unknown"
+            
             formatted_history.append({
-                "type": msg.type,
-                "content": msg.content
+                "type": msg_type,
+                "content": content,
+                "data": msg.dict() if hasattr(msg, "dict") else {}
             })
             
         return make_response(

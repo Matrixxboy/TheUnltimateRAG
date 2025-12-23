@@ -1,7 +1,8 @@
 import shutil
 import os
 import uuid
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, Form
+from typing import Optional
 from utils.Response_Helper import make_response
 from utils.Response_Helper_Model import HTTPStatusCode, APICode
 from core.rag_engine import RAGPipeline
@@ -10,7 +11,10 @@ router = APIRouter()
 rag_engine = RAGPipeline()
 
 @router.post("/ingest")
-async def ingest_document(file: UploadFile = File(...)):
+async def ingest_document(
+    file: UploadFile = File(...),
+    user_id: Optional[str] = Form(None)
+):
     """
     Upload and ingest a document (PDF or TXT) into the vector store.
     """
@@ -23,7 +27,7 @@ async def ingest_document(file: UploadFile = File(...)):
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
             
-        chunks_count = rag_engine.ingest_file(file_path)
+        chunks_count = rag_engine.ingest_file(file_path, user_id=user_id)
         
         return make_response(
             status=HTTPStatusCode.OK,
