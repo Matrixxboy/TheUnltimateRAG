@@ -13,11 +13,21 @@ rag_engine = RAGPipeline()
 @router.post("/ingest")
 async def ingest_document(
     file: UploadFile = File(...),
-    user_id: Optional[str] = Form(None)
+    user_id: Optional[str] = Form(None),
+    access_level: str = Form("private")  # "private" or "common"
 ):
     """
     Upload and ingest a document (PDF or TXT) into the vector store.
     """
+    # Security Validation
+    if access_level == "private" and not user_id:
+        return make_response(
+            status=HTTPStatusCode.BAD_REQUEST,
+            code=APICode.BAD_REQUEST,
+            message="User ID is required for private documents.",
+            error="Missing user_id"
+        )
+
     temp_dir = "temp_uploads"
     os.makedirs(temp_dir, exist_ok=True)
     
@@ -27,7 +37,7 @@ async def ingest_document(
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
             
-        chunks_count = rag_engine.ingest_file(file_path, user_id=user_id)
+        chunks_count = rag_engine.ingest_file(file_path, user_id=user_id, access_level=access_level)
         
         return make_response(
             status=HTTPStatusCode.OK,

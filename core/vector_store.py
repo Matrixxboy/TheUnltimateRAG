@@ -17,7 +17,7 @@ class VectorManager:
             embedding_function=self.embeddings,
         )
 
-    def add_documents(self, documents: List[Document], user_id: Optional[str] = None):
+    def add_documents(self, documents: List[Document], user_id: Optional[str] = None, access_level: str = "private"):
         """
         Add a list of documents to the vector store.
         """
@@ -25,9 +25,13 @@ class VectorManager:
             return
         
         # Add metadata
-        if user_id:
-            for doc in documents:
+        for doc in documents:
+            if access_level == "private" and not user_id:
+                raise ValueError("User ID must be provided for private documents.")
+                
+            if user_id:
                 doc.metadata["user_id"] = user_id
+            doc.metadata["access_level"] = access_level
         
         self.vector_store.add_documents(documents)
         # self.vector_store.persist()

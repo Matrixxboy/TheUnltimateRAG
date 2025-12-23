@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     
     # OpenAI
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
-    MODEL_NAME: str = os.getenv("MODEL_NAME")
+    MODEL_NAME: str = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
     
     # Vector Store
     VECTOR_DB_PATH: str = os.getenv("VECTOR_DB_PATH")

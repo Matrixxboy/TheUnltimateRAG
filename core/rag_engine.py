@@ -19,23 +19,34 @@ class RAGPipeline:
         self.base_retriever = self.vector_manager.get_retriever()
 
     def _retrieve_context(self, question: str, user_id: str = None):
-        # Create a dynamic retriever with filter if user_id is provided
-        search_kwargs = {}
+        # Create a dynamic retriever with filter
+        # Logic: (user_id == current_user) OR (access_level == "common")
+        
+        filter_criteria = {}
+        
         if user_id:
-            search_kwargs["filter"] = {"user_id": user_id}
+            filter_criteria = {
+                "$or": [
+                    {"user_id": user_id},
+                    {"access_level": "common"}
+                ]
+            }
+        else:
+            # If no user_id, only show common data (public access)
+            filter_criteria = {"access_level": "common"}
             
-        retriever = self.vector_manager.get_retriever(search_kwargs=search_kwargs)
+        retriever = self.vector_manager.get_retriever(search_kwargs={"filter": filter_criteria})
         docs = retriever.invoke(question)
         return "\n\n".join(d.page_content for d in docs)
 
     def _get_session_history(self, session_id: str):
         return self.memory_manager.get_session_memory(session_id)
 
-    def ingest_file(self, file_path: str, user_id: str = None):
+    def ingest_file(self, file_path: str, user_id: str = None, access_level: str = "private"):
         from core.ingestion import IngestionManager
         ingester = IngestionManager()
         docs = ingester.process_and_split(file_path)
-        self.vector_manager.add_documents(docs, user_id=user_id)
+        self.vector_manager.add_documents(docs, user_id=user_id, access_level=access_level)
         return len(docs)
 
     def query(self, session_id: str, query_text: str, system_prompt: str = None, 
