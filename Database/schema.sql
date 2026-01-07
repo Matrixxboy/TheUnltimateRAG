@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS long_term_memories (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(255) NOT NULL,
+    summary_chunk TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

@@ -15,7 +15,6 @@ import SmoothScroll from "./components/SmoothScroll"
 function App() {
   return (
     <ServerStatusProvider>
-      <MaintenanceScreen />
       <Router>
         <SmoothScroll>
           <div className="flex flex-col min-h-screen bg-white">

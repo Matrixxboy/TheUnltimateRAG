@@ -42,6 +42,10 @@ export const ServerStatusProvider = ({ children }) => {
     }
   }
 
+  useEffect(() => {
+    checkHealth()
+  }, [])
+
   return (
     <ServerStatusContext.Provider value={{ isServerDown, checkHealth }}>
       {children}

@@ -17,7 +17,8 @@ class Settings(BaseSettings):
     COLLECTION_NAME: str = os.getenv("COLLECTION_NAME")
     
     # Memory
-    MEMORY_WINDOW_SIZE: int = int(os.getenv("MEMORY_WINDOW_SIZE"))
+    MEMORY_WINDOW_SIZE: int = int(os.getenv("MEMORY_WINDOW_SIZE", "10"))
+    SHORT_TERM_MEMORY_LIMIT: int = int(os.getenv("SHORT_TERM_MEMORY_LIMIT", "5")) # N number of chats before consolidation
 
     
     model_config = SettingsConfigDict(

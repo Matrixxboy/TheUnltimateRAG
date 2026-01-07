@@ -97,9 +97,17 @@ class RAGPipeline:
             k=10 # Visualize top 10
         )
         
+        # 4. Check & Consolidate Memory (Fire and forget, or sync)
+        # We do this after response generation to not latency the user (ideally async, but sync for now)
+        try:
+            self.memory_manager.enforce_memory_consolidation(session_id)
+        except Exception as e:
+            print(f"Memory consolidation failed: {e}")
+
         return {
             "content": response.content,
             "usage_metadata": response.response_metadata if hasattr(response, "response_metadata") else {},
             "params": model_params,
             "visualization": viz_data
         }
+

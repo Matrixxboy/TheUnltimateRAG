@@ -1,6 +1,7 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { useServerStatus } from "../context/ServerStatus"
-
+import { RiHomeSmileFill } from "react-icons/ri"
 const MaintenanceScreen = () => {
   const { isServerDown } = useServerStatus()
 
@@ -36,9 +37,15 @@ const MaintenanceScreen = () => {
           check back later or host the project locally.
         </p>
 
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-medium text-purple-600 transition-all bg-purple-100 border border-purple-200 rounded-xl hover:bg-purple-500 hover:text-white shadow-lg shadow-slate-200 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 mb-3"
+        >
+          <RiHomeSmileFill className="w-6 h-6 mr-1" />
+          <p>Home</p>
+        </Link>
         <a
           href="https://github.com/Matrixxboy/TheUnltimateRAG"
-          target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-medium text-white transition-all bg-slate-900 rounded-xl hover:bg-slate-800 shadow-lg shadow-slate-200 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
         >
@@ -54,8 +61,9 @@ const MaintenanceScreen = () => {
               clipRule="evenodd"
             />
           </svg>
-          Click here to host locally
+          <p>Click here to host locally</p>
         </a>
+        
       </div>
     </div>
   )

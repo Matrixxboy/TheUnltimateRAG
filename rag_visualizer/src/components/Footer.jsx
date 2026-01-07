@@ -41,9 +41,6 @@ const Footer = () => {
 
                 <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
                     <p>&copy; 2025 The Ultimate RAG. Open Source.</p>
-                    <p className="flex items-center gap-1">
-                        Made with <Heart className="w-3 h-3 text-red-400 fill-red-400" /> by Matrixboy
-                    </p>
                 </div>
             </div>
         </footer>
