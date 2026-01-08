@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "theultimaterag"
+version = "0.1.1"
+description = "A modular, production-ready Retrieval-Augmented Generation (RAG) platform with multi-vector database support"
+readme = "PYPI.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Matrixxboy", email = "matrix.utsav.lankapati@gmail.com" }
+]
+
+keywords = [
+  "rag",
+  "llm",
+  "ai",
+  "fastapi",
+  "langchain",
+  "vector-database",
+  "retrieval-augmented-generation"
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Framework :: FastAPI",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+  "fastapi>=0.110.0",
+  "uvicorn>=0.27.0",
+  "python-dotenv>=1.0.1",
+  "httpx>=0.27.0",
+  "python-multipart>=0.0.9",
+
+  "pydantic>=2.6.0",
+  "pydantic-settings>=2.2.0",
+
+  "langchain>=0.1.10",
+  "langchain-core>=0.1.28",
+  "langchain-community>=0.0.25",
+  "langchain-openai>=0.0.8",
+  "langchain-text-splitters>=0.0.1",
+
+  "chromadb>=0.4.24",
+  "pgvector>=0.2.5",
+  "psycopg2-binary>=2.9.9",
+  "redis>=5.0.0",
+
+  "openai>=1.13.0",
+  "tiktoken>=0.6.0",
+
+  "pypdf>=4.0.0",
+  "scikit-learn>=1.4.0"
+]
+
+[project.urls]
+Homepage = "https://theultimaterag.vercel.app/"
+Documentation = "https://theultimaterag.vercel.app/docs"
+Source = "https://github.com/Matrixxboy/TheUnltimateRAG"
+Issues = "https://github.com/Matrixxboy/TheUnltimateRAG/issues"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "black",
+  "ruff",
+  "mypy"
+]
+
+[project.scripts]
+theultimaterag = "theultimaterag.server:start"

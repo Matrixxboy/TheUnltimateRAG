@@ -47,71 +47,6 @@ For a complete walkthrough, architecture deep-dives, and usage examples,
 📘 **visit the official documentation:**  
 **https://theultimaterag.vercel.app/**
 
----
-
-## 🌟 Key Features (Explained Simply)
-
-| Feature | What It Means for You |
-|------|----------------|
-| ⚡ **High-Performance API** | Built with **FastAPI** for fast, async, and scalable AI services |
-| 🛡️ **True Multi-Tenant Isolation** | Each user’s data is fully isolated and secure |
-| 🏢 **Organization-Level Knowledge** | Share documents across teams without duplicating data |
-| 🧠 **Session-Aware Memory** | Conversations retain context naturally across turns |
-| 🔍 **Hybrid Semantic Search** | Metadata-aware vector search with logical filters |
-| 👁️ **RAG Visualizer GUI** | Real-time visualization of retrieval, context, and generation |
-
----
-
-## 🏗️ System Architecture (Designed for Flexibility)
-
-The system follows a **plug-and-play architecture**.  
-You can replace or extend **any core component** without breaking the rest of the system.
-
-- Swap vector databases
-- Change LLM providers
-- Add custom memory logic
-- Introduce agent workflows
-
-```mermaid
-graph TD
-    Client[Client / Frontend] -->|HTTP / JSON| API[FastAPI Gateway]
-
-    subgraph "Core RAG Engine"
-        API --> Logic[Orchestrator]
-        Logic -->|Retrieve Context| Vector[Vector Store Manager]
-        Logic -->|Conversation State| Memory[Session Memory]
-        Logic -->|Generate Response| LLM[LLM Service]
-    end
-
-    subgraph "Data Layer"
-        Vector <-->|Embeddings| Chroma[(ChromaDB)]
-        Memory <-->|Chat Logs| Cache[(In-Memory / Redis)]
-    end
-````
-
-📖 **Detailed architecture explanation available at:**
-👉 [https://theultimaterag.vercel.app/](https://theultimaterag.vercel.app/)
-
----
-
-
-
-## 🚀 Getting Started Quickly
-
-### Requirements
-
-* Python **3.10+**
-* Node.js & npm (for the Visualizer UI)
-* API keys (OpenAI, Anthropic, etc.)
-
-### Installation Steps
-
-1️⃣ **Clone the Repository**
-
-```bash
-pip install TUG
-```
-
 # 🔐 Environment Configuration for TheUltimateRAG
 
 To run **TheUltimateRAG** correctly, you must create and configure a `.env` file.  
@@ -276,81 +211,18 @@ VECTOR_DB_TYPE=chroma
 
 ---
 
-📘 Refer to the full configuration guide here:
-👉 [https://theultimaterag.vercel.app/](https://theultimaterag.vercel.app/)
+## ⚠️ Important Notes
 
-3️⃣ **Run the Platform**
-
-```bash
-TUG start
-```
-
-*or*
-
-```bash
-python app.py
-```
+* **Do NOT commit `.env` to Git**
+* Add `.env` to `.gitignore`
+* Use different `.env` files for dev & prod if needed
 
 ---
 
-## 🖥️ RAG Visualizer GUI
+## 📘 Need More Help?
 
-A dedicated **React-based GUI** lets you:
+For advanced configuration, architecture details, and examples, visit:
 
-* Inspect retrieved documents
-* Understand context flow
-* Debug hallucinations
-* Optimize retrieval strategies
-
-```bash
-cd rag_visualizer
-npm install
-npm run dev
-```
+👉 **[https://theultimaterag.vercel.app/](https://theultimaterag.vercel.app/)**
 
 ---
-
-## 📡 API Endpoints Overview
-
-Access live API documentation at:
-👉 `http://localhost:8000/docs`
-
-### Core APIs
-
-* **POST** `/api/v1/chat` → Chat with your knowledge base
-* **POST** `/api/v1/ingest` → Secure document ingestion
-
-### Agent & Advanced APIs
-
-* **GET** `/api/v1/agent/tools`
-* **POST** `/api/v1/agent/search`
-* **POST** `/api/v1/agent/workflow` → Self-correcting RAG pipelines
-
-📘 Full API reference:
-👉 [https://theultimaterag.vercel.app/](https://theultimaterag.vercel.app/)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome and encouraged 🚀
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a Pull Request
-
-See `CONTRIBUTING.md` for guidelines.
-
-## 🎓 Learning & Documentation
-
-* 📘 **Official Docs:** [https://theultimaterag.vercel.app/](https://theultimaterag.vercel.app/)
-* 📚 **User Manual:** `USER_MANUAL.md`
-* 🌱 **Git Learning Guide:** `LEARN.md`
-
----
-
-<div align="center">
-Built with ❤️ by Matrixxboy  
-Empowering real-world RAG systems
-</div>
