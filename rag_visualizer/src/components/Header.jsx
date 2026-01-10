@@ -36,9 +36,9 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-50">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3 group">
-          <div className="bg-slate-900 p-2 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-200">
+          {/* <div className="bg-slate-900 p-2 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-200">
             <Layout className="w-6 h-6 text-white" />
-          </div>
+          </div> */}
           <span className="text-2xl font-bold text-slate-900 tracking-tight">
             TUG
             <span className="text-purple-600">.</span>
