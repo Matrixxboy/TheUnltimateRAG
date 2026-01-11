@@ -112,12 +112,13 @@ const Home = () => {
         <motion.div
           style={{ scale, opacity }}
           className="z-10 w-full max-w-5xl mx-auto"
-        >
+          >
+          <div className="flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8"
+            className="mb-8 w-[300px] flex flex-col items-center justify-center gap-2"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/5 text-slate-600 text-sm font-semibold border border-slate-200 backdrop-blur-sm cursor-default hover:bg-slate-100 transition-colors">
               <span className="relative flex h-2 w-2">
@@ -126,8 +127,15 @@ const Home = () => {
               </span>
               v1.0 Production Ready
             </span>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/5 text-slate-600 text-sm font-semibold border border-slate-200 backdrop-blur-sm cursor-default hover:bg-slate-100 transition-colors">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+              </span>
+              Developement Status : 3 - Alpha
+            </span>
           </motion.div>
-
+        </div>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
